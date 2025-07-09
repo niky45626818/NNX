@@ -1,70 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NNX - Productos Únicos</title>
-    <link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climatización Total</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>NNX</h1>
-        <p class="eslogan">Es para todo, es para sentirse único</p>
-    </header>
-    <main>
-        <section class="productos">
-            <div class="producto">
-                <img src="imagenes/1.webp" alt="Producto 1">
-                <p class="precio">$10.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/2.webp" alt="Producto 2">
-                <p class="precio">$20.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/3.webp" alt="Producto 3">
-                <p class="precio">$30.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/4.webp" alt="Producto 4">
-                <p class="precio">$40.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/5.webp" alt="Producto 5">
-                <p class="precio">$50.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/6.webp" alt="Producto 6">
-                <p class="precio">$60.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/7.webp" alt="Producto 7">
-                <p class="precio">$70.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/8.webp" alt="Producto 8">
-                <p class="precio">$80.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/9.webp" alt="Producto 9">
-                <p class="precio">$90.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/10.webp" alt="Producto 10">
-                <p class="precio">$100.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/11.webp" alt="Producto 11">
-                <p class="precio">$110.00</p>
-            </div>
-            <div class="producto">
-                <img src="imagenes/12.webp" alt="Producto 12">
-                <p class="precio">$120.00</p>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Vikati - Todos los derechos reservados</p>
-    </footer>
+  <header>
+    <div class="logo-container">
+      <img src="img/logo.png" alt="Logo">
+      <h1>CLIMATIZACIÓN TOTAL</h1>
+    </div>
+    <nav class="nav-bar">
+      <a href="#quienes">QUIÉNES SOMOS</a>
+      <a href="#climatizacion">CLIMATIZACIÓN</a>
+      <a href="#calefaccion">CALEFACCIÓN</a>
+      <a href="#contacto">CONTACTO</a>
+      <a href="#hogar">HOGAR</a>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="presupuesto">PEDIR PRESUPUESTO A MEDIDA</a>
+    </nav>
+  </header>
+
+<section id="portada">
+  <img src="img/portada.png" class="logo-contacto" alt="Imagen de Portada" style="width:100%; max-height:600px; object-fit:cover;">
+</section>
+
+
+<section class="contador-section">
+  <div class="contador-box">
+    <div class="contador-item">
+      <span id="experiencia" class="contador-numero">0</span>
+      <p>Años de experiencia</p>
+    </div>
+    <div class="contador-item">
+      <span id="instalaciones" class="contador-numero">0</span>
+      <p>Instalaciones exitosas</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateCounter(id, target, duration) {
+    let count = 0;
+    const increment = Math.ceil(target / (duration / 30));
+    const element = document.getElementById(id);
+    const interval = setInterval(() => {
+      count += increment;
+      if (count >= target) {
+        count = target;
+        clearInterval(interval);
+      }
+      element.textContent = `+${count}`;
+    }, 30);
+  }
+
+  const observerCount = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter("experiencia", 20, 800);
+        animateCounter("instalaciones", 200, 1000);
+        observerCount.disconnect();
+      }
+    });
+  });
+
+  observerCount.observe(document.querySelector('.contador-section'));
+</script>
+
+
+  <main>
+    <section id="climatizacion">
+      <h2>Aires Acondicionados</h2>
+      <div class="productos">
+        <img src="img/ac1.png" alt="Aire Acondicionado 1">
+        <img src="img/ac2.png" alt="Aire Acondicionado 2">
+        <img src="img/ac3.png" alt="Aire Acondicionado 3">
+      </div>
+    </section>
+
+    <section id="quienes" class="fade-in">
+    <div class="quienes-box">
+        <div class="quienes-content">
+        <div class="quienes-texto">
+            <h2>Quiénes Somos</h2>
+            <p>Somos una empresa especializada en climatización y calefacción para hogares, comercios y oficinas. Con años de experiencia, ofrecemos asesoramiento personalizado, instalaciones seguras y productos de alta eficiencia energética.</p>
+        </div>
+        <div class="quienes-logo">
+            <img src="img/logo.png" alt="Logo Empresa">
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="calefaccion">
+      <h2>Calefacción</h2>
+      <div class="productos">
+        <img src="img/cal.png" alt="Calefactor">
+      </div>
+    </section>
+
+    <section id="hogar">
+      <h2>Ofertas para tu hogar</h2>
+      <div class="productos">
+        <img src="img/oferta1.png" alt="Oferta 1">
+        <img src="img/oferta2.png" alt="Oferta 2">
+        <img src="img/xion.png" alt="Producto Xion">
+      </div>
+    </section>
+
+    <div class="cta">
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank">¡Comprar por WhatsApp!</a>
+    </div>
+  </main>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Izquierda: Logo -->
+    <div class="footer-left">
+      <img src="img/logo.png" alt="Logo" class="footer-logo">
+    </div>
+
+    <!-- Centro: Contacto -->
+    <div class="footer-center">
+      <p class="footer-title">CONTACTO</p>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-wsp">+54 9 XX XXXX XXXX</a>
+    </div>
+
+    <!-- Derecha: Botones -->
+    <div class="footer-right">
+      <button class="footer-btn">Precios y productos sujetos a presupuesto</button>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-btn">Contactanos para recibir tu presupuesto gratis</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Popup -->
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-content" id="popupContent">
+    <span class="popup-close" id="closePopup">&times;</span>
+    <img src="img/logo.png" alt="Logo">
+    <hr style="width: 60px; margin: 10px auto;">
+    <p>Podes pedir cualquier presupuesto <strong>GRATIS</strong> para adquirir climatización o calefacción para tu hogar por medio de nuestro WhatsApp</p>
+    <p style="font-size: 2em;">⬇⬇⬇</p>
+    <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="popup-btn">
+      <img src="img/wsp.png" alt="WhatsApp"> <span>PEDIR PRESUPUESTO</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- Scripts -->
+<script>
+  // Fade-in scroll
+  const fadeIn = document.querySelector('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  });
+  observer.observe(fadeIn);
+
+  setTimeout(() => {
+    document.getElementById('popup').style.display = 'flex';
+  }, 30000);
+
+  // Cerrar al hacer clic en la X
+  document.getElementById('closePopup').addEventListener('click', () => {
+    document.getElementById('popup').style.display = 'none';
+  });
+
+  // Cerrar al hacer clic fuera del popup
+  document.getElementById('popup').addEventListener('click', (e) => {
+    if (e.target.id === 'popup') {
+      document.getElementById('popup').style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
