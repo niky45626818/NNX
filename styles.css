@@ -36,18 +36,17 @@ body {
   margin: 0;
 }
 
-/* —— Capa negra con logo + nav —— */
 .nav-bar {
   background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 10px 20px;
+  padding: 20px 20px;    /* ↑ duplicamos el vertical para hacerlo más alto */
   gap: 15px;
+  min-height: 60px;      /* altura mínima para que siempre quepa el hamburger */
 }
 
-/* Logo a la izquierda */
 .nav-bar .logo {
   position: absolute;
   left: 20px;
@@ -55,7 +54,7 @@ body {
   transform: translateY(-50%);
 }
 .nav-bar .logo img {
-  max-height: 40px;    /* ajusta este valor si necesitas más o menos */
+  max-height: 40px;
   width: auto;
 }
 
@@ -108,7 +107,6 @@ body {
   height: 2px;
   margin: 4px 0;
   background: #fff;
-  border-radius: 0;
   transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -138,13 +136,6 @@ body {
   gap: 16px;
   justify-content: center;
 }
-@media (max-width: 600px) {
-  .categorias-box > a,
-  .ofertas-box > .oferta,
-  .contador-box > .contador-item {
-    flex: 1 1 48%;
-  }
-}
 
 /*==========================================================
   PORTADA
@@ -159,7 +150,7 @@ body {
 }
 .logo-contacto {
   width: 80%;
-  max-width: 300px;       /* ajusta aquí */
+  max-width: 300px;
 }
 .hero-text {
   max-width: 500px;
@@ -376,13 +367,6 @@ h2 {
   gap: 16px;
   justify-content: center;
 }
-@media (max-width: 600px) {
-  .categorias-box > a,
-  .ofertas-box > .oferta {
-    flex: 1 1 48%;
-  }
-}
-
 .categoria {
   display: flex;
   flex-direction: column;
@@ -415,8 +399,6 @@ h2 {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(0,0,0,0.15);
 }
-
-/* Ofertas */
 .ofertas {
   text-align: center;
   margin: 60px 0;
@@ -520,33 +502,101 @@ h2 {
 /*==========================================================
   RESPONSIVE: MÓVIL HASTA 768px
 ==========================================================*/
-@media (max-width: 768px) {
-  /* … */
-
-  /* 1) Mostrar hamburguesa */
-  .hamburger {
-    display: flex !important;
-    /* resto de estilos… */
+@media (max-width: 480px) {
+  .categorias-box,
+  .ofertas-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* reparte el espacio sobrante */
+    gap: 10px;                       /* un puntito de separación */
   }
 
-  /* 2) Ocultar menú desktop */
-  .nav-menu {            /* <-- corregido, punto en lugar de guión */
+  .categorias-box > .categoria,
+  .ofertas-box  > .oferta {
+    flex: 0 1 48%;    /* base fija: ocupa hasta el 48% */
+    max-width: 48%;   /* no crecerá más allá de ello */
+  }
+}
+
+
+  /* 2) Botón hamburguesa: tamaño fijo, siempre encima */
+  .hamburger {
+    display: flex !important;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    flex-direction: column;
+    justify-content: space-around;    /* espacio uniforme */
+    width: 40px !important;           /* ancho fijo */
+    height: 30px !important;          /* alto fijo */
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    z-index: 100 !important;
+    overflow: visible !important;
+  }
+  /* 3) Las rayitas blancas */
+  .hamburger span {
+    display: block !important;
+    width: 100% !important;
+    height: 4px !important;            /* un poco más gruesas para verlas */
+    background-color: #fff !important; /* blanco puro */
+    border-radius: 2px !important;     /* bordes suavizados */
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  /* 4) Ocultar menú desktop */
+  .nav-menu {
     display: none !important;
   }
 
-  /* 3) Mostrar menú móvil cuando tenga .open */
+  /* 5) Mostrar menú móvil cuando tenga .open */
   .nav-menu.open {
     display: flex !important;
-    flex-direction: column;
+    flex-direction: column !important;
     position: fixed;
     top: 0;
     right: 0;
     width: 75%;
     height: 100vh;
     background: #1e1b1a;
-    padding: 80px 20px;
-    gap: 25px;
+    padding: 0;
     transition: transform 0.3s;
-    z-index: 45;
+    z-index: 90 !important;
   }
+
+  /* 5a) Enlaces apilados */
+  .nav-menu.open ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+    padding: 40px 20px;
+    margin: 0;
+    list-style: none;
+  }
+  .nav-menu.open ul a {
+    padding: 10px 0;
+    font-size: 1.2em;
+  }
+
+  /* 6) Dos cajas por fila hasta 768px */
+  .categorias-box > a,
+  .ofertas-box > .oferta,
+  .contador-box > .contador-item {
+    flex: 1 1 48%;
+  }
+}
+
+/* Transformación de las barras en X cuando el botón tiene .open */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }

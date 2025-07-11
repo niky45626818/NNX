@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aire Acondicionado – Tecnología Clima</title>
+  <link rel="stylesheet" href="css/ac.css">
+</head>
+<body>
+  <div class="menu-overlay"></div>
+
+  <header class="site-header">
+    <div class="top-bar">
+      <h1>Tecnologia Clima</h1>
+    </div>
+    <div class="nav-bar">
+      <a href="index.html" class="logo">
+        <img src="img/logo.png" alt="Tecnología Clima">
+      </a>
+      <button class="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html">INICIO</a></li>
+          <li><a href="aire_acondicionado.html">AIRE ACONDICIONADO</a></li>
+          <li><a href="calefaccion.html">CALEFACCIÓN</a></li>
+          <li><a href="contacto.html">CONTACTO</a></li>
+          <!-- más enlaces si los tienes -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Portada específica de aire acondicionado -->
+    <section id="portada-ac">
+      <img src="img/aire_portada.png" alt="Portada Aire Acondicionado">
+    </section>
+
+    <!-- Productos de aire acondicionado -->
+    <section class="ac-productos">
+      <h2>Aire Acondicionado – Nuestros Modelos</h2>
+      <div class="ac-grid">
+        <!-- Producto 1 -->
+        <div class="ac-item">
+          <img src="img/ac1.png" alt="TCL Split / Inverter">
+          <h3>AIRE ACONDICIONADO TCL SPLIT / INVERTER</h3>
+          <p>4.558 frig/h – Frío/Calor – Blanco 220V.</p>
+          <a href="https://wa.me/549XXXXXXXXXX" class="ac-btn" target="_blank">
+            Presupuestar por WhatsApp
+          </a>
+        </div>
+        <!-- Producto 2 -->
+        <div class="ac-item">
+          <img src="img/ac2.png" alt="BGH Silent Air Slip">
+          <h3>AIRE ACONDICIONADO BGH SILENT AIR SLIP</h3>
+          <p>3.000 frig/h – Frío/Calor – Blanco 220V – Modelo BS35WCCR.</p>
+          <a href="https://wa.me/549XXXXXXXXXX" class="ac-btn" target="_blank">
+            Presupuestar por WhatsApp
+          </a>
+        </div>
+        <!-- Producto 3 -->
+        <div class="ac-item">
+          <img src="img/ac3.png" alt="BGH Cooltime">
+          <h3>AIRE ACONDICIONADO BGH COOLTIME</h3>
+          <p>3.000 frig/h – Frío/Calor – Blanco 220V – Modelo COOLTIME.</p>
+          <a href="https://wa.me/549XXXXXXXXXX" class="ac-btn" target="_blank">
+            Presupuestar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <img src="img/logo.png" alt="Logo" class="footer-logo">
+      </div>
+      <div class="footer-center">
+        <p class="footer-title">CONTACTO</p>
+        <a href="https://wa.me/549XXXXXXXXXX" class="footer-wsp" target="_blank">+54 9 XX XXXX XXXX</a>
+      </div>
+      <div class="footer-right">
+        <button class="footer-btn">Precios sujetos a presupuesto</button>
+        <a href="https://wa.me/549XXXXXXXXXX" class="footer-btn" target="_blank">
+          Contáctanos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnHamburger = document.querySelector('.hamburger');
+      const navMenu      = document.querySelector('.nav-menu');
+      const overlay      = document.querySelector('.menu-overlay');
+      btnHamburger.addEventListener('click', () => {
+        btnHamburger.classList.toggle('open');
+        navMenu.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', () => {
+        btnHamburger.classList.remove('open');
+        navMenu.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

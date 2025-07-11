@@ -7,29 +7,37 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- overlay del menú móvil -->
+  <div class="menu-overlay"></div>
+
   <header class="site-header">
     <!-- Capa superior: título -->
     <div class="top-bar">
       <h1>Tecnologia Clima</h1>
     </div>
+
     <!-- Capa inferior: logo + nav -->
     <div class="nav-bar">
       <a href="index.html" class="logo">
         <img src="img/logo.png" alt="Tecnología Clima">
       </a>
+
+      <!-- botón hamburguesa para móvil -->
       <button class="hamburger" aria-label="Abrir menú">
         <span></span>
         <span></span>
         <span></span>
       </button>
+
+      <!-- menú de navegación -->
       <nav class="nav-menu">
         <ul>
-          <a href="quienes-somos.html">QUIÉNES SOMOS</a>
-          <a href="climatizacion.html">CLIMATIZACIÓN</a>
-          <a href="calefaccion.html">CALEFACCIÓN</a>
-          <a href="contacto.html">CONTACTO</a>
-          <a href="hogar.html">HOGAR</a>
-          <a href="presupuesto.html">PEDIR PRESUPUESTO A MEDIDA</a>
+          <li><a href="quienes-somos.html">QUIÉNES SOMOS</a></li>
+          <li><a href="climatizacion.html">CLIMATIZACIÓN</a></li>
+          <li><a href="calefaccion.html">CALEFACCIÓN</a></li>
+          <li><a href="contacto.html">CONTACTO</a></li>
+          <li><a href="hogar.html">HOGAR</a></li>
+          <li><a href="presupuesto.html">PEDIR PRESUPUESTO A MEDIDA</a></li>
         </ul>
       </nav>
     </div>
@@ -60,7 +68,7 @@
     <section class="categorias">
       <h2>Categorías</h2>
       <div class="categorias-box">
-        <a href="aires_acondicionado.html" class="categoria">
+        <a href="aire_acondcionado.html" class="categoria">
           <img src="img/ac1.png" alt="Aire Acondicionado">
           <h3>Aire Acondicionados</h3>
           <p>Soluciones de climatización eficientes para tu hogar y oficina.</p>
@@ -156,8 +164,8 @@
         const timer = setInterval(() => {
           count += step;
           if (count >= target) {
-            count = target;
             clearInterval(timer);
+            count = target;
           }
           el.textContent = `+${count}`;
         }, 30);
@@ -186,24 +194,25 @@
         }
       });
 
-      // Menú hamburguesa
-      const hamb = document.querySelector('.hamburger');
-      const menu = document.querySelector('.nav-menu');
-      const overlay = document.createElement('div');
-      overlay.className = 'menu-overlay';
-      document.body.appendChild(overlay);
+    
+        const btnHamburger = document.querySelector('.hamburger');
+        const navMenu      = document.querySelector('.nav-menu');
+        const overlay      = document.querySelector('.menu-overlay');
 
-      hamb.addEventListener('click', () => {
-        hamb.classList.toggle('open');
-        menu.classList.toggle('open');
-        overlay.classList.toggle('open');
+        // 1) Al hacer click en el botón hamburguesa
+        btnHamburger.addEventListener('click', () => {
+          btnHamburger.classList.toggle('open');
+          navMenu.classList.toggle('open');
+          overlay.classList.toggle('open');
+        });
+
+        // 2) Al hacer click fuera (overlay) cerramos todo
+        overlay.addEventListener('click', () => {
+          btnHamburger.classList.remove('open');
+          navMenu.classList.remove('open');
+          overlay.classList.remove('open');
+        });
       });
-      overlay.addEventListener('click', () => {
-        hamb.classList.remove('open');
-        menu.classList.remove('open');
-        overlay.classList.remove('open');
-      });
-    });
   </script>
 </body>
 </html>
