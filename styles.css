@@ -8,11 +8,11 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
-  color: #333;
+  color: #602686;
 }
 
 header {
-  background-color: #000;
+  background-color: #cd4b00;
   text-align: center;
   padding: 10px 0;
 }
@@ -34,15 +34,29 @@ header {
   font-size: 1.2em;
   letter-spacing: 1px;
 }
+#portada {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centra columnas en horizontal */
+  align-items: center;     /* alinea en vertical */
+  gap: 40px;               /* separa un poco imagen y texto */
+  padding: 40px 0;
+}
 
 .logo-contacto {
-  width: 500px;
-  max-width: 100%;
+  width: 180%;
+  max-width: 900px;
+}
+
+.hero-text {
+  max-width: 500px;
+  text-align: left;       /* o center si prefieres */
 }
 
 
+
 .nav-bar {
-  background-color: #1a1c1e;
+  background-color: #1e1b1a;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -433,4 +447,283 @@ footer {
 .contador-item p {
   font-size: 1.2em;
   color: #444;
+}
+
+/* ———————— Sección Categorías con imagen y hover ———————— */
+.categorias-box {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 250px;
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.categoria img {
+  width: 130px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.categoria h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.categoria p {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.categoria:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+
+/* ———————— Sección Ofertas ———————— */
+.ofertas {
+  text-align: center;
+  margin: 60px 0;
+}
+.ofertas-box {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.oferta {
+  flex: 0 1 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.oferta img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+.oferta h3 {
+  font-size: 1.1em;
+  margin: 15px 0 10px;
+}
+.oferta p {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 15px;
+}
+.oferta button {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.oferta button:hover {
+  background: #1eb851;
+}
+
+/* ———————— Sección Proceso ———————— */
+.proceso {
+  text-align: center;
+  margin: 60px 0 100px;
+}
+.proceso h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #222;
+}
+.proceso p {
+  font-size: 1em;
+  color: #444;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* ====== Cabecera general ====== */
+.site-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* — Capa naranja con el título — */
+.top-bar {
+  background: #000000;       /* tu naranja */
+  text-align: center;
+  padding: 8px 0;
+}
+.top-bar h1 {
+  color: #fff;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* — Capa negra con logo + nav — */
+.nav-bar {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 20px;
+}
+
+/* logo posicionado a la izquierda */
+.nav-bar .logo {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-bar .logo img {
+  max-height: 40px;  /* ajusta según tu diseño */
+}
+
+/* nav de escritorio */
+.nav-menu ul {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+.nav-menu li {
+  list-style: none;
+  position: relative;
+}
+.nav-menu li + li::before {
+  content: '•';              /* punto separador */
+  color: #cc00ff;            /* morado */
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+/* overlay semitransparente */
+.menu-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 5;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ====== Botón hamburguesa ====== */
+.hamburger {
+  display: none;      /* oculto en desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* animación X */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* nav desplazable en móvil (fuera de pantalla) */
+.nav-menu {
+  transition: right 0.3s;
+}
+.nav-menu.open {
+  right: 0 !important;
+}
+  
+/* ====== Responsive ≤768px ====== */
+@media (max-width: 768px) {
+
+  /* ocultar menú inline, mostrar hamburguesa */
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 25px;
+  }
+  .nav-menu {
+    position: fixed;
+    top: 0; 
+    right: -100%;        /* fuera de pantalla */
+    width: 75%;
+    height: 100vh;
+    background: #111;
+    padding: 80px 20px;
+    z-index: 9;
+  }
+  .hamburger {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar h1 {
+    font-size: 1.2em;
+  }
+  .nav-bar {
+    flex-direction: column;
+    padding: 8px 10px;
+  }
+  .hamburger {
+    right: 15px;
+    top: 50%;
+  }
 }

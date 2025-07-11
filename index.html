@@ -7,180 +7,203 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="img/logo.png" alt="Logo">
-      <h1>CLIMATIZACIÓN TOTAL</h1>
+  <header class="site-header">
+    <!-- Capa superior: título -->
+    <div class="top-bar">
+      <h1>Tecnologia Clima</h1>
     </div>
-    <nav class="nav-bar">
-      <a href="#quienes">QUIÉNES SOMOS</a>
-      <a href="#climatizacion">CLIMATIZACIÓN</a>
-      <a href="#calefaccion">CALEFACCIÓN</a>
-      <a href="#contacto">CONTACTO</a>
-      <a href="#hogar">HOGAR</a>
-      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="presupuesto">PEDIR PRESUPUESTO A MEDIDA</a>
-    </nav>
+    <!-- Capa inferior: logo + nav -->
+    <div class="nav-bar">
+      <a href="index.html" class="logo">
+        <img src="img/logo.png" alt="Tecnología Clima">
+      </a>
+      <button class="hamburger" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-menu">
+        <ul>
+          <a href="quienes-somos.html">QUIÉNES SOMOS</a>
+          <a href="climatizacion.html">CLIMATIZACIÓN</a>
+          <a href="calefaccion.html">CALEFACCIÓN</a>
+          <a href="contacto.html">CONTACTO</a>
+          <a href="hogar.html">HOGAR</a>
+          <a href="presupuesto.html">PEDIR PRESUPUESTO A MEDIDA</a>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-<section id="portada">
-  <img src="img/portada.png" class="logo-contacto" alt="Imagen de Portada" style="width:100%; max-height:600px; object-fit:cover;">
-</section>
-
-
-<section class="contador-section">
-  <div class="contador-box">
-    <div class="contador-item">
-      <span id="experiencia" class="contador-numero">0</span>
-      <p>Años de experiencia</p>
-    </div>
-    <div class="contador-item">
-      <span id="instalaciones" class="contador-numero">0</span>
-      <p>Instalaciones exitosas</p>
-    </div>
-  </div>
-</section>
-
-<script>
-  function animateCounter(id, target, duration) {
-    let count = 0;
-    const increment = Math.ceil(target / (duration / 30));
-    const element = document.getElementById(id);
-    const interval = setInterval(() => {
-      count += increment;
-      if (count >= target) {
-        count = target;
-        clearInterval(interval);
-      }
-      element.textContent = `+${count}`;
-    }, 30);
-  }
-
-  const observerCount = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter("experiencia", 20, 800);
-        animateCounter("instalaciones", 200, 1000);
-        observerCount.disconnect();
-      }
-    });
-  });
-
-  observerCount.observe(document.querySelector('.contador-section'));
-</script>
-
-
   <main>
-    <section id="climatizacion">
-      <h2>Aires Acondicionados</h2>
-      <div class="productos">
-        <img src="img/ac1.png" alt="Aire Acondicionado 1">
-        <img src="img/ac2.png" alt="Aire Acondicionado 2">
-        <img src="img/ac3.png" alt="Aire Acondicionado 3">
+    <!-- Portada -->
+    <section id="portada">
+      <img src="img/portada.png" class="logo-contacto" alt="Imagen de Portada"
+           style="width:70%; max-height:400px; object-fit:cover;">
+    </section>
+
+    <!-- Contadores -->
+    <section class="contador-section">
+      <div class="contador-box">
+        <div class="contador-item">
+          <span id="experiencia" class="contador-numero">0</span>
+          <p>Años de experiencia</p>
+        </div>
+        <div class="contador-item">
+          <span id="instalaciones" class="contador-numero">0</span>
+          <p>Instalaciones exitosas</p>
+        </div>
       </div>
     </section>
 
-    <section id="quienes" class="fade-in">
-    <div class="quienes-box">
-        <div class="quienes-content">
-        <div class="quienes-texto">
-            <h2>Quiénes Somos</h2>
-            <p>Somos una empresa especializada en climatización y calefacción para hogares, comercios y oficinas. Con años de experiencia, ofrecemos asesoramiento personalizado, instalaciones seguras y productos de alta eficiencia energética.</p>
-        </div>
-        <div class="quienes-logo">
-            <img src="img/logo.png" alt="Logo Empresa">
-        </div>
-        </div>
-    </div>
-    </section>
-
-    <section id="calefaccion">
-      <h2>Calefacción</h2>
-      <div class="productos">
-        <img src="img/cal.png" alt="Calefactor">
+    <!-- Categorías -->
+    <section class="categorias">
+      <h2>Categorías</h2>
+      <div class="categorias-box">
+        <a href="aires_acondicionado.html" class="categoria">
+          <img src="img/ac1.png" alt="Aire Acondicionado">
+          <h3>Aire Acondicionados</h3>
+          <p>Soluciones de climatización eficientes para tu hogar y oficina.</p>
+        </a>
+        <a href="calefaccion.html" class="categoria">
+          <img src="img/cal.png" alt="Calefacción">
+          <h3>Calefacción</h3>
+          <p>Sistemas de calefacción modernos y seguros.</p>
+        </a>
+        <a href="hogar.html" class="categoria">
+          <img src="img/xion.png" alt="Hogar">
+          <h3>Hogar</h3>
+          <p>Productos para confort y bienestar en tu hogar.</p>
+        </a>
       </div>
     </section>
 
-    <section id="hogar">
-      <h2>Ofertas para tu hogar</h2>
-      <div class="productos">
-        <img src="img/oferta1.png" alt="Oferta 1">
-        <img src="img/oferta2.png" alt="Oferta 2">
-        <img src="img/xion.png" alt="Producto Xion">
+    <!-- Ofertas -->
+    <section class="ofertas">
+      <h2>OFERTAS MÁS PEDIDAS</h2>
+      <div class="ofertas-box">
+        <div class="oferta">
+          <img src="img/oferta1.png" alt="Oferta 1">
+          <h3>Paquete Verano</h3>
+          <p>Instalación de aire acond. + mantenimiento.</p>
+          <button>Comprar</button>
+        </div>
+        <div class="oferta">
+          <img src="img/oferta2.png" alt="Oferta 2">
+          <h3>Calor Hogareño</h3>
+          <p>Calefactor + instalación exprés.</p>
+          <button>Comprar</button>
+        </div>
+        <div class="oferta">
+          <img src="img/xion.png" alt="Oferta 3">
+          <h3>Confort Total</h3>
+          <p>Climatización integral de tu hogar.</p>
+          <button>Comprar</button>
+        </div>
       </div>
     </section>
 
+    <!-- Proceso -->
+    <section class="proceso">
+      <h2>Proceso de Instalación, Presupuesto y Entrega</h2>
+      <p>Descripción de los pasos para solicitar tu presupuesto, gestionar la instalación y tiempos de entrega.</p>
+    </section>
+
+    <!-- CTA -->
     <div class="cta">
       <a href="https://wa.me/549XXXXXXXXXX" target="_blank">¡Comprar por WhatsApp!</a>
     </div>
   </main>
 
-<footer class="footer">
-  <div class="footer-container">
-    <!-- Izquierda: Logo -->
-    <div class="footer-left">
-      <img src="img/logo.png" alt="Logo" class="footer-logo">
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <img src="img/logo.png" alt="Logo" class="footer-logo">
+      </div>
+      <div class="footer-center">
+        <p class="footer-title">CONTACTO</p>
+        <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-wsp">+54 9 XX XXXX XXXX</a>
+      </div>
+      <div class="footer-right">
+        <button class="footer-btn">Precios y productos sujetos a presupuesto</button>
+        <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-btn">Contáctanos para tu presupuesto gratis</a>
+      </div>
     </div>
+  </footer>
 
-    <!-- Centro: Contacto -->
-    <div class="footer-center">
-      <p class="footer-title">CONTACTO</p>
-      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-wsp">+54 9 XX XXXX XXXX</a>
-    </div>
-
-    <!-- Derecha: Botones -->
-    <div class="footer-right">
-      <button class="footer-btn">Precios y productos sujetos a presupuesto</button>
-      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="footer-btn">Contactanos para recibir tu presupuesto gratis</a>
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <span class="popup-close" id="closePopup">&times;</span>
+      <img src="img/logo.png" alt="Logo">
+      <hr style="width: 60px; margin: 10px auto;">
+      <p>Podes pedir cualquier presupuesto <strong>GRATIS</strong> por WhatsApp</p>
+      <p style="font-size: 2em;">⬇⬇⬇</p>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="popup-btn">
+        <img src="img/wsp.png" alt="WhatsApp"><span>PEDIR PRESUPUESTO</span>
+      </a>
     </div>
   </div>
-</footer>
 
-
-<!-- Popup -->
-<!-- Popup -->
-<div class="popup-overlay" id="popup">
-  <div class="popup-content" id="popupContent">
-    <span class="popup-close" id="closePopup">&times;</span>
-    <img src="img/logo.png" alt="Logo">
-    <hr style="width: 60px; margin: 10px auto;">
-    <p>Podes pedir cualquier presupuesto <strong>GRATIS</strong> para adquirir climatización o calefacción para tu hogar por medio de nuestro WhatsApp</p>
-    <p style="font-size: 2em;">⬇⬇⬇</p>
-    <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="popup-btn">
-      <img src="img/wsp.png" alt="WhatsApp"> <span>PEDIR PRESUPUESTO</span>
-    </a>
-  </div>
-</div>
-
-
-<!-- Scripts -->
-<script>
-  // Fade-in scroll
-  const fadeIn = document.querySelector('.fade-in');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Contadores
+      function animateCounter(id, target, duration) {
+        let count = 0;
+        const step = Math.ceil(target / (duration / 30));
+        const el = document.getElementById(id);
+        const timer = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            count = target;
+            clearInterval(timer);
+          }
+          el.textContent = `+${count}`;
+        }, 30);
       }
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter('experiencia', 20, 800);
+            animateCounter('instalaciones', 200, 1000);
+            obs.disconnect();
+          }
+        });
+      });
+      obs.observe(document.querySelector('.contador-section'));
+
+      // Popup automático
+      setTimeout(() => {
+        document.getElementById('popup').style.display = 'flex';
+      }, 30000);
+      document.getElementById('closePopup').addEventListener('click', () => {
+        document.getElementById('popup').style.display = 'none';
+      });
+      document.getElementById('popup').addEventListener('click', e => {
+        if (e.target.id === 'popup') {
+          e.currentTarget.style.display = 'none';
+        }
+      });
+
+      // Menú hamburguesa
+      const hamb = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const overlay = document.createElement('div');
+      overlay.className = 'menu-overlay';
+      document.body.appendChild(overlay);
+
+      hamb.addEventListener('click', () => {
+        hamb.classList.toggle('open');
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+      });
+      overlay.addEventListener('click', () => {
+        hamb.classList.remove('open');
+        menu.classList.remove('open');
+        overlay.classList.remove('open');
+      });
     });
-  });
-  observer.observe(fadeIn);
-
-  setTimeout(() => {
-    document.getElementById('popup').style.display = 'flex';
-  }, 30000);
-
-  // Cerrar al hacer clic en la X
-  document.getElementById('closePopup').addEventListener('click', () => {
-    document.getElementById('popup').style.display = 'none';
-  });
-
-  // Cerrar al hacer clic fuera del popup
-  document.getElementById('popup').addEventListener('click', (e) => {
-    if (e.target.id === 'popup') {
-      document.getElementById('popup').style.display = 'none';
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
