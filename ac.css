@@ -1,0 +1,492 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.logo img {
+  height: 50px;
+}
+
+/* NAVEGACIÓN */
+.nav {
+  display: flex;
+  align-items: center;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: color 0.2s;
+}
+.nav-links a.active {
+  color: #e74c3c;
+}
+.nav-links a:hover {
+  color: #e74c3c;
+}
+
+/* HAMBURGER MENU (móvil) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* MENU RESPONSIVO */
+@media (max-width: 1024px) {
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .nav-links.open {
+    max-height: 500px;
+  }
+  .nav-links li {
+    padding: 15px;
+    text-align: center;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
+.hero {
+  /* forzar que ocupe el 100% del viewport */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;      /* logo/texto encima del botón */
+  align-items: center;
+  justify-content: center;     /* centra todo verticalmente */
+  padding: 20px;               /* menos padding para “achicar” */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* limita la altura de la imagen para no salirse */
+.hero img {
+  max-height: 70vh;            /* como máximo 40% de la altura de la ventana */
+  width: auto;
+  margin-bottom: 20px;
+}
+
+/* texto responsivo, más pequeño en pantallas grandes */
+.hero-texto {
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+.hero-texto h1 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.hero-texto p {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  margin-bottom: 20px;
+}
+
+.btn-hero {
+  background: #e74c3c;
+  color: white;
+  padding: 15px 30px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.1em;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+.btn-hero:hover {
+  background: #c0392b;
+}
+
+/* PRODUCTOS DESTACADOS */
+.productos-destacados {
+  padding: 40px 20px;
+  background: #fff;
+  text-align: center;
+}
+.productos-destacados h2 {
+  font-size: 1.8em;
+  margin-bottom: 30px;
+}
+.productos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.producto {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 15px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.producto img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.producto h3 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+.producto p {
+  margin-bottom: 10px;
+  color: #666;
+}
+.btn-accion {
+  background: #cd4b00;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-accion:hover {
+  background: #a23b00;
+}
+
+/* FOOTER */
+footer {
+  background: #000;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.footer-container p {
+  margin: 0;
+}
+.btn-wsp {
+  background: #25d366;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+.btn-wsp:hover {
+  background: #1eb851;
+}
+
+/* SECCIÓN DESTACADA NARANJA */
+.seccion-producto-destacado {
+  background: #ff924a;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* Contenedor principal en columna */
+.producto-destacado-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Imagen principal grande */
+.img-principal img {
+  width: 800px;
+  max-width: 150vw;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* MINIATURAS ESTÁTICAS DEBAJO */
+.carrousel {
+  width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0;          /* ajusta si quieres más/menos espacio */
+  }
+  .carrousel-track {
+    display: flex;
+    flex-wrap: nowrap;        /* ¡nunca envuelve! */
+    justify-content: flex-start;
+    gap: 25px;
+    /* opcional: snap para encajar cada slide al centro */
+    scroll-snap-type: x mandatory;
+  }
+ 
+.carrousel-track img {
+  flex: 0 0 180px;        /* cada imagen mide 180px de ancho */
+  height: 120px;          /* ajusta la altura como gustes */
+  object-fit: cover;      /* sigue recortando sin deformar */
+  scroll-snap-align: center;
+  transition: transform .2s;
+}
+
+
+.carrousel-track img:hover,
+.carrousel-track img.active {
+  transform: scale(1.1);
+  border-color: #222;
+}
+
+
+.titulo-calderas {
+  text-align: center;                                    /* Centrado */
+  font-family: 'Times New Roman', Times, serif;           /* Tipografía serif */
+  color: rgba(0, 0, 0, 0.2);                              /* Gris suave, pero más oscuro */
+  font-size: 2.5rem;                                      /* Un pelín más grande */
+  margin: 1.5rem 0;                                       /* Espacio arriba y abajo */
+  font-weight: 400;                                       /* Peso normal para Times */
+  -webkit-font-smoothing: antialiased;                    /* Mejora la nitidez en WebKit */
+  -moz-osx-font-smoothing: grayscale;                     /* Mejora la nitidez en Firefox */
+}
+
+
+/* Estilos para la sección de contadores */
+.counter-section {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 4rem 1rem;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+.counter-item {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.counter {
+  display: block;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #e94e1b;
+  margin-bottom: 0.5rem;
+}
+
+.counter-item p {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+
+/* SECCIÓN “Nuestros Servicios” */
+.servicios {
+  padding: 4rem 1rem;
+  background: #fafafa;
+  text-align: center;
+}
+.servicios h2 {
+  font-size: 3rem;
+  color: #374151;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de scroll horizontal */
+.servicios-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+}
+.servicios-track::-webkit-scrollbar {
+  height: 8px;
+}
+.servicios-track::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+/* Cada tarjeta */
+.servicio-card {
+  flex: 0 0 45%;              /* Ocupa 45% del ancho del viewport */
+  background: #fff;
+  display: flex;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 0;           /* Esquinas punteagudas */
+  scroll-snap-align: start;
+}
+
+/* Imagen recortada */
+.servicio-thumb {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+.servicio-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* Corta/rellena sin deformar */
+  display: block;
+}
+
+/* Texto */
+.servicio-detalle {
+  flex: 1;
+  padding: 1.5rem;
+  text-align: left;
+  overflow-y: auto;           /* Si el texto es muy largo, scroll interno */
+}
+.servicio-detalle h3 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+.servicio-detalle h4 {
+  font-size: 1.2rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+.servicio-detalle p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  /* El track pasa a columna */
+  .servicios-track {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 0;
+  }
+
+  /* Cada tarjeta ocupa 100% y apila imagen y texto */
+  .servicio-card {
+    flex: 0 0 auto;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  /* La miniatura a todo ancho, con altura fija para recortar */
+  .servicio-thumb {
+    flex: none;
+    width: 100%;
+    height: 200px;       /* Ajusta según necesidad */
+  }
+  .servicio-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Detalle sin scroll interno, todo el texto visible */
+  .servicio-detalle {
+    overflow: visible;
+    max-height: none;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 1) Apilar imagen principal + descripción */
+  .producto-destacado-contenedor {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
+  /* 2) Imagen principal a todo ancho */
+  .img-principal img {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  /* 3) Área de texto ocupa 100% y centrada */
+  .producto-info {
+    width: 100%;
+    padding: 0 .5rem;
+    text-align: center;
+  }
+
+  /* 4) Reducir un poco el título */
+  .titulo-calderas {
+    font-size: 3rem;
+  }
+
+  /* 5) Carrusel en flujo normal + scroll horizontal */
+  .carrousel {
+    position: static;
+    overflow-x: auto;
+    padding: 1px 0;
+  }
+  .carrousel-track {
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+  .carrousel-track img {
+    flex: 0 0 100px;   /* ancho miniatura */
+    height: 70px;      /* alto miniatura */
+    object-fit: cover;
+    scroll-snap-align: start;
+  }
+}
+
+
+.hero {
+  overflow: visible;  /* Antes era overflow: hidden; */
+}
+
+/* 2) Forzar que la portada se escale sin recortarse */
+.hero img {
+  width: 50%;        /* Ocupa el 100% del ancho del viewport */
+  height: auto;       /* Ajusta la altura proporcionalmente */
+  max-height: none;   /* Elimina el límite de altura previa (70vh) */
+  object-fit: contain;/* Mantiene la imagen completa dentro del área */
+}
