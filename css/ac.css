@@ -434,20 +434,59 @@ footer {
   }
 }
 
-
 @media (max-width: 768px) {
-  .carrousel {
-    padding: 8px 0;
+  /* 1) Apilar imagen principal + descripción */
+  .producto-destacado-contenedor {
+    flex-direction: column;
+    padding: 20px 10px;
   }
 
+  /* 2) Imagen principal a todo ancho */
+  .img-principal img {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  /* 3) Área de texto ocupa 100% y centrada */
+  .producto-info {
+    width: 100%;
+    padding: 0 .5rem;
+    text-align: center;
+  }
+
+  /* 4) Reducir un poco el título */
+  .titulo-calderas {
+    font-size: 3rem;
+  }
+
+  /* 5) Carrusel en flujo normal + scroll horizontal */
+  .carrousel {
+    position: static;
+    overflow-x: auto;
+    padding: 1px 0;
+  }
   .carrousel-track {
+    flex-wrap: nowrap;
     gap: 12px;
   }
-
   .carrousel-track img {
-    flex: 0 0 120px;      /* ancho fijo más pequeño para que entren 3-4 */
-    height: 90px;         /* ajusta la relación alto/ancho */
-    object-fit: cover;    /* recorta sin deformar */
-    scroll-snap-align: center;
+    flex: 0 0 100px;   /* ancho miniatura */
+    height: 70px;      /* alto miniatura */
+    object-fit: cover;
+    scroll-snap-align: start;
   }
+}
+
+
+.hero {
+  overflow: visible;  /* Antes era overflow: hidden; */
+}
+
+/* 2) Forzar que la portada se escale sin recortarse */
+.hero img {
+  width: 50%;        /* Ocupa el 100% del ancho del viewport */
+  height: auto;       /* Ajusta la altura proporcionalmente */
+  max-height: none;   /* Elimina el límite de altura previa (70vh) */
+  object-fit: contain;/* Mantiene la imagen completa dentro del área */
 }

@@ -1,207 +1,245 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tecnología Clima</title>
-  <link rel="stylesheet" href="css/ac.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tecnología Clima | Calefacción y Confort</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Header -->
+  <header class="site-header" id="home">
+    <div class="topbar topbar--row">
+      <a href="#home" class="brand" aria-label="Tecnología Clima">
+        <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo" />
+        <span class="brand__name">Tecnología Clima</span>
+      </a>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <img src="img/logo.png" alt="Logo Tecnología Clima">
+      <nav class="nav">
+        <ul class="nav__links" id="navLinks">
+          <li><a href="#home" class="nav__link">Inicio</a></li>
+          <li><a href="#categorias" class="nav__link">Categorías</a></li>
+          <li><a href="#productos" class="nav__link">Productos</a></li>
+          <li><a href="#valores" class="nav__link">Valores</a></li>
+          <li><a href="#servicios" class="nav__link">Servicios</a></li>
+          <li><a href="#opiniones" class="nav__link">Opiniones</a></li>
+          <li><a href="#marcas" class="nav__link">Marcas</a></li>
+          <li><a href="#contacto" class="nav__link">Contacto</a></li>
+        </ul>
+
+        <!-- Hamburguesa -->
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
     </div>
-    <nav class="nav">
-      <ul class="nav-links">
-        <li><a href="#" class="active">HOME</a></li>
-        <li><a href="#">PRODUCTOS</a></li>
-        <li><a href="#">SERVICIOS</a></li>
-        <li><a href="#">QUIÉNES SOMOS</a></li>
-        <li><a href="#">OFICINA DE VENTAS</a></li>
-        <li><a href="#">CONTACTO</a></li>
-      </ul>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </nav>
+
+    <!-- Overlay para menú mobile -->
+    <div class="menu-overlay" id="menuOverlay"></div>
   </header>
 
-  <!-- HERO -->
+  <!-- Hero -->
   <section class="hero">
-    <img src="img/portada.png" alt="Fondo principal">
-    <div class="hero-btn-container">
-      <a href="#" class="btn-hero">Ver Productos</a>
+    <div class="hero__content">
+      <h1>Confort eficiente para tu hogar</h1>
+      <p>Calderas, radiadores y toalleros con instalación profesional y postventa real.</p>
+      <a class="btn btn--wsp" href="#" id="ctaHero">Quiero cotizar por WhatsApp</a>
+    </div>
+    <img class="hero__image" src="img/portada.png" alt="Soluciones de climatización" />
+  </section>
+
+  <!-- Categorías (atalhos) -->
+  <section class="wrap" id="categorias">
+    <h2>Categorías</h2>
+    <div class="grid grid--cats">
+      <a href="#calderas-hogar" class="cat">
+        <img src="img/caldera_prima_tec.png" onerror="this.src='img/caldera.png'" alt="Calderas hogareñas">
+        <h3>Calderas Hogareñas</h3>
+      </a>
+      <a href="#calderas-centrales" class="cat">
+        <img src="img/optima_condens.png" onerror="this.src='img/cal.png'" alt="Calderas centrales">
+        <h3>Calderas Centrales</h3>
+      </a>
+      <a href="#radiadores" class="cat">
+        <img src="img/radiador_broen.png" onerror="this.src='img/radiador_gamma.png'" alt="Radiadores">
+        <h3>Radiadores</h3>
+      </a>
+      <a href="#toalleros" class="cat">
+        <img src="img/scala.png" onerror="this.src='img/scala_S.png'" alt="Toalleros">
+        <h3>Toalleros</h3>
+      </a>
     </div>
   </section>
 
-  <section class="productos-destacados">
-    <h2>Productos Destacados</h2>
-    <div class="productos-grid">
-      <div class="producto">
-        <img src="img/ac1.png" alt="Producto 1">
-        <h3>Split Inverter TCL</h3>
-        <p>Frío/Calor - 4500 Frig/h</p>
-        <a href="#" class="btn-accion">Consultar</a>
-      </div>
-      <div class="producto">
-        <img src="img/ac2.png" alt="Producto 2">
-        <h3>BGH Silent Air</h3>
-        <p>Frío/Calor - 3000 Frig/h</p>
-        <a href="#" class="btn-accion">Consultar</a>
-      </div>
-      <div class="producto">
-        <img src="img/ac3.png" alt="Producto 3">
-        <h3>BGH Cooltime</h3>
-        <p>Frío/Calor - 3000 Frig/h</p>
-        <a href="#" class="btn-accion">Consultar</a>
+  <!-- Productos -->
+  <main class="wrap" id="productos">
+    <!-- Calderas Hogareñas -->
+    <section id="calderas-hogar" class="block block-products" data-key="calderas-hogar">
+      <h2>Calderas Hogareñas</h2>
+      <div class="featured" id="feat-calderas-hogar"></div>
+      <div class="cards cards--list" id="cards-calderas-hogar"></div>
+    </section>
+
+    <!-- Calderas Centrales -->
+    <section id="calderas-centrales" class="block block-products" data-key="calderas-centrales">
+      <h2>Calderas Centrales</h2>
+      <div class="featured" id="feat-calderas-centrales"></div>
+      <div class="cards cards--list" id="cards-calderas-centrales"></div>
+    </section>
+
+    <!-- Radiadores -->
+    <section id="radiadores" class="block block-products" data-key="radiadores">
+      <h2>Radiadores</h2>
+      <div class="featured" id="feat-radiadores"></div>
+      <div class="cards cards--list" id="cards-radiadores"></div>
+    </section>
+
+    <!-- Toalleros -->
+    <section id="toalleros" class="block block-products" data-key="toalleros">
+      <h2>Toalleros</h2>
+      <div class="featured" id="feat-toalleros"></div>
+      <div class="cards cards--list" id="cards-toalleros"></div>
+    </section>
+  </main>
+
+  <!-- Nuestros valores principales -->
+  <section class="wrap valores" id="valores" aria-labelledby="valores-title">
+    <h2 id="valores-title">Nuestros Valores Principales</h2>
+    <p class="valores__tagline">La pasión por lo que hacemos nos hace diferentes, te hace diferente.</p>
+
+    <div class="valores__grid">
+      <article class="valor">
+        <div class="valor__icon">👤</div>
+        <h3>Foco en el cliente</h3>
+        <p>Soluciones a medida según necesidades, evaluando calidad, costo y beneficio.</p>
+      </article>
+      <article class="valor">
+        <div class="valor__icon">✅</div>
+        <h3>Calidad total</h3>
+        <p>Procesos planificados, primeras marcas y estándares para garantizar excelencia.</p>
+      </article>
+      <article class="valor">
+        <div class="valor__icon">👍</div>
+        <h3>Servicio postventa</h3>
+        <p>Acompañamiento y asesoramiento constante para optimizar el rendimiento.</p>
+      </article>
+      <article class="valor">
+        <div class="valor__icon">👥</div>
+        <h3>Profesionales</h3>
+        <p>Equipo especializado con capacitaciones continuas.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Servicios (con imágenes) -->
+  <section class="wrap servicios" id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <div class="grid grid--serv">
+      <article class="serv">
+        <img src="img/logo.png" alt="" class="serv__img">
+        <div>
+          <h3>Asesoramiento</h3>
+          <p>Relevamos tu necesidad y dimensionamos la solución de forma efectiva.</p>
+        </div>
+      </article>
+      <article class="serv">
+        <img src="img/logo.png" alt="" class="serv__img">
+        <div>
+          <h3>Instalación</h3>
+          <p>Montaje prolijo, seguro y dentro de norma. Coordinación llave en mano.</p>
+        </div>
+      </article>
+      <article class="serv">
+        <img src="img/logo.png" alt="" class="serv__img">
+        <div>
+          <h3>Mantenimiento</h3>
+          <p>Mantenimientos preventivos y correctivos para alargar la vida útil.</p>
+        </div>
+      </article>
+      <article class="serv">
+        <img src="img/logo.png" alt="" class="serv__img">
+        <div>
+          <h3>Garantía & Postventa</h3>
+          <p>Soporte real, repuestos y seguimiento para que todo funcione perfecto.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Opiniones -->
+  <section class="wrap opiniones" id="opiniones">
+    <h2>Opiniones de Clientes</h2>
+    <div class="grid grid--opin">
+      <blockquote class="op">
+        <p>“Instalaron caldera y radiadores. Trabajo impecable y atención de 10.”</p>
+        <cite>— Sofía R.</cite>
+      </blockquote>
+      <blockquote class="op">
+        <p>“Cotización clara, cumplieron los tiempos y quedó espectacular.”</p>
+        <cite>— Mariano D.</cite>
+      </blockquote>
+      <blockquote class="op">
+        <p>“Posventa real. Me ayudaron a optimizar el consumo. Recomendables.”</p>
+        <cite>— Paula V.</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Marcas (carrusel rueda infinita) -->
+  <section class="marcas" id="marcas" aria-label="Marcas con las que trabajamos">
+    <div class="marcas__viewport">
+      <div class="marcas__track">
+        <div class="marcas__group">
+          <img src="img/marcas.png" alt="Marca 1">
+          <img src="img/marcas.png" alt="Marca 2">
+          <img src="img/marcas.png" alt="Marca 3">
+          <img src="img/marcas.png" alt="Marca 4">
+          <img src="img/marcas.png" alt="Marca 5">
+          <img src="img/marcas.png" alt="Marca 6">
+          <img src="img/marcas.png" alt="Marca 7">
+          <img src="img/marcas.png" alt="Marca 8">
+          <img src="img/marcas.png" alt="Marca 9">
+          <img src="img/marcas.png" alt="Marca 10">
+        </div>
+        <div class="marcas__group" aria-hidden="true">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+          <img src="img/marcas.png" alt="">
+        </div>
       </div>
     </div>
   </section>
 
-<section id="contadores" class="counter-section">
-  <div class="counter-item">
-    <span class="counter" data-target="20">0</span>+
-    <p>Años de experiencia</p>
-  </div>
-  <div class="counter-item">
-    <span class="counter" data-target="500">0</span>+
-    <p>Instalaciones exitosas</p>
-  </div>
-</section>
-
-<section class="seccion-producto-destacado">
-      </div>
-
-    <!-- Nuevo título central -->
-    <h2 class="titulo-calderas">Calderas</h2>
-
-  </div>
-  <div class="producto-destacado-contenedor">
-    <div class="img-principal">
-      <img id="imgGrande" src="img/c1_principal.png" alt="Producto grande">
+  <!-- Contacto -->
+  <section class="wrap contacto" id="contacto">
+    <h2>Contacto</h2>
+    <div class="contacto__box">
+      <label for="msg">Contanos qué necesitás</label>
+      <textarea id="msg" rows="5" placeholder="Ej: Necesito cotizar una caldera para 3 ambientes..."></textarea>
+      <button class="btn btn--wsp" id="btnWsp">Enviar consulta a WhatsApp</button>
+      <small>Te llevamos a WhatsApp (con o sin mensaje escrito).</small>
     </div>
+  </section>
 
-    <div class="carrousel">
-      <div class="carrousel-track">
-        <img src="img/c1.png" alt="c1" onclick="cambiarImagen('c1_principal.png')">
-        <img src="img/c2.png" alt="c2" onclick="cambiarImagen('c2_principal.png')">
-        <img src="img/c3.png" alt="c3" onclick="cambiarImagen('c3_principal.png')">
-        <img src="img/c4.png" alt="c4" onclick="cambiarImagen('c4_principal.png')">
-        <img src="img/c5.png" alt="c5" onclick="cambiarImagen('c5_principal.png')">
-      </div>
-
-</section>
-
-
-
-<section id="nuestros-servicios" class="servicios">
-  <h2>Nuestros Servicios</h2>
-
-  <div class="servicios-track">
-    <div class="servicio-card">
-      <div class="servicio-thumb">
-        <img src="img/pr.png" alt="Piso Radiante PEX">
-      </div>
-      <div class="servicio-detalle">
-        <h3>Calefacción</h3>
-        <h4>Piso Radiante PEX</h4>
-        <p>
-          Circulación de agua a baja temperatura (45 – 55 °C) por serpentines de
-          polietileno reticulado empotrados en el contrapiso. Los circuitos son
-          independientes y comandados desde cajas de colectores.
-        </p>
-      </div>
-    </div>
-
-    <div class="servicio-card">
-      <div class="servicio-thumb">
-        <img src="img/caldera.png" alt="Radiadores">
-      </div>
-      <div class="servicio-detalle">
-        <h3>Calefacción</h3>
-        <h4>Radiadores</h4>
-        <p>
-          Distribución en paralelo mediante tuberías PEX. Perfecto balance
-          térmico y tiempos de ejecución optimizados. Transferencia de calor
-          mayormente por convección.
-        </p>
-      </div>
-    </div>
-
-    <!-- Repite .servicio-card para cada servicio -->
-  </div>
-</section>
-
-
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Tecnología Clima</p>
-      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="btn-wsp">Contáctanos por WhatsApp</a>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap footer__content">
+      <a href="#home" class="brand brand--footer">
+        <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo" />
+        <span class="brand__name">Tecnología Clima</span>
+      </a>
+      <p>© <span id="year"></span> Tecnología Clima — Todos los derechos reservados</p>
+      <a class="btn btn--ghost" href="#home">Volver arriba</a>
     </div>
   </footer>
 
-
-  <script>
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      hamburger.classList.toggle('open');
-    });
-  
-
-
-  function cambiarImagen(nombre) {
-    document.getElementById('imgGrande').src = "img/" + nombre;
-  }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const counters = document.querySelectorAll('.counter');
-  const options = {
-    root: null,           // viewport
-    threshold: 0.5        // 50% de visibilidad
-  };
-
-  const runCounter = (entry) => {
-    const el = entry.target;
-    const target = +el.getAttribute('data-target');
-    const duration = 2000; // duración total en ms
-    const stepTime = Math.abs(Math.floor(duration / target));
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += 1;
-      el.textContent = current;
-      if (current >= target) {
-        clearInterval(timer);
-      }
-    }, stepTime);
-  };
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        runCounter(entry);
-        observer.unobserve(entry.target); // Deja de observar tras la primera activación
-      }
-    });
-  }, options);
-
-  counters.forEach(counter => {
-    observer.observe(counter);
-  });
-});
-
-  
-  </script>
-
-
+  <script src="app.js"></script>
 </body>
 </html>
-
-
