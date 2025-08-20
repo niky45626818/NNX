@@ -56,13 +56,36 @@ const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 /* ======= Reveal on scroll (inicia tras el splash) ======= */
-window.addEventListener("load", () => {
-  // Arrancamos el reveal un pelín después del splash
-  setTimeout(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    initReveal();
-  }, 1600);
+/* ======= Reveal on scroll (robusto) ======= */
+/* Marca el body para que el CSS oculte los data-reveal */
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("reveal-enable");
 });
+
+/* Inicia el reveal después del splash, y con fallback revela todo */
+function startReveal(){
+  document.documentElement.style.scrollBehavior = "smooth";
+  initReveal();
+
+  // Fallback: si algo falló, revela todo igual
+  setTimeout(() => {
+    document.querySelectorAll("[data-reveal]:not(.reveal-in)")
+      .forEach(el => el.classList.add("reveal-in"));
+  }, 3500);
+}
+
+window.addEventListener("load", () => {
+  setTimeout(startReveal, 1600); // coordina con el splash
+});
+
+/* Header fijo: calcula la altura y la expone en --header-h */
+function setHeaderOffset(){
+  const h = document.querySelector('.site-header')?.offsetHeight || 64;
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+window.addEventListener('load', setHeaderOffset);
+window.addEventListener('resize', setHeaderOffset);
+
 
 function initReveal(){
   const obs = new IntersectionObserver((entries) => {

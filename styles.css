@@ -16,6 +16,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+html, body { width:100%; overflow-x:hidden; }
+
 
 /* ========= Splash ========= */
 #splash{
@@ -26,7 +28,13 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue'
 .splash__logo{width:min(32vw,200px); height:auto; filter:drop-shadow(0 6px 18px rgba(0,0,0,.08))}
 
 /* ========= Header / Nav ========= */
-.site-header{position:sticky; top:0; z-index:50; background:#000}
+.site-header{position:fixed; top:0; z-index:70; background:#000; width: 100%;}
+/* Deja espacio al contenido bajo el header fijo */
+body{ padding-top: var(--header-h, 64px); }
+
+/* Al hacer click en los anchors (#servicios, etc.) que no queden tapados */
+[id]{ scroll-margin-top: calc(var(--header-h, 64px) + 12px); }
+
 .topbar--row{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.6rem 1rem}
 .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none}
 .brand__logo{height:34px; width:auto}
@@ -126,7 +134,21 @@ h2{font-size:clamp(22px,2.6vw,30px); text-align:center; margin-bottom:1.1rem}
   .serv{grid-template-columns:120px 1fr; min-height:130px}
 }
 @media (max-width:720px){
-  .serv{grid-template-columns:100px 1fr; min-height:120px}
+  /* Servicios — mobile: 1 columna sin overflow */
+.grid--serv{ grid-template-columns: 1fr; }
+
+.serv{
+  grid-template-columns: 1fr;     /* una sola columna */
+  grid-template-rows: 160px auto; /* imagen arriba, texto abajo */
+  min-height: unset;
+}
+
+.serv__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;              /* usá 'contain' si no querés recorte */
+}
+
 }
 
 /* ========= Opiniones ========= */
@@ -153,10 +175,21 @@ textarea{resize:vertical; border:1px solid #e6e6e6; border-radius:10px; padding:
 .brand--footer .brand__name{color:#fff}
 
 /* ========= Reveal on scroll ========= */
-[data-reveal]{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
-[data-reveal="left"]{transform:translateX(-18px)}
-[data-reveal="right"]{transform:translateX(18px)}
+/* ========= Reveal on scroll (seguro) ========= */
+/* Visible por defecto (si JS no corre, no se ocultan) */
+[data-reveal]{opacity:1; transform:none}
+
+/* Solo se ocultan cuando el JS enciende las animaciones */
+.reveal-enable [data-reveal]{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal-enable [data-reveal="left"]{transform:translateX(-18px)}
+.reveal-enable [data-reveal="right"]{transform:translateX(18px)}
+
 .reveal-in{opacity:1 !important; transform:none !important}
+
 
 /* ========= Responsive ========= */
 @media (max-width:1100px){
