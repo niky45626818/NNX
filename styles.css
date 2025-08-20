@@ -9,13 +9,21 @@
   --card:#f6f6f6;
   --wsp:#25d366;
   --shadow:0 6px 18px rgba(0,0,0,.06);
-  --radius:10px;           /* menos redondeado */
+  --radius:10px;
   --radius-small:8px;
-  --border:#e9e9e9;        /* menos contraste que sombra fuerte */
+  --border:#e9e9e9;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+
+/* ========= Splash ========= */
+#splash{
+  position:fixed; inset:0; background:#fff; display:grid; place-items:center;
+  z-index:1000; opacity:1; transition:opacity .6s ease;
+}
+#splash.hide{opacity:0; pointer-events:none}
+.splash__logo{width:min(32vw,200px); height:auto; filter:drop-shadow(0 6px 18px rgba(0,0,0,.08))}
 
 /* ========= Header / Nav ========= */
 .site-header{position:sticky; top:0; z-index:50; background:#000}
@@ -45,11 +53,11 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue'
 .hero__image{width:100%; border-radius:var(--radius); box-shadow:var(--shadow); object-fit:cover}
 
 /* ========= Buttons ========= */
-.btn{display:inline-block; padding:.85rem 1.1rem; border-radius:12px; font-weight:700; text-decoration:none; transition:filter .15s ease; border:0; cursor:pointer}
+.btn{display:inline-block; padding:.85rem 1.1rem; border-radius:12px; font-weight:700; text-decoration:none; transition:filter .15s ease, box-shadow .2s ease, transform .08s ease; border:1px solid transparent; cursor:pointer}
 .btn--wsp{background:var(--wsp); color:#fff}
-.btn--wsp:hover{filter:brightness(.96)}
+.btn--wsp:hover{filter:brightness(.96); box-shadow:0 0 0 2px rgba(37,211,102,.25), 0 6px 18px rgba(0,0,0,.08)}
 .btn--ghost{background:#2b2b2b; color:#fff}
-.btn--ghost:hover{filter:brightness(1.05)}
+.btn--ghost:hover{filter:brightness(1.05); box-shadow:0 0 0 2px rgba(255,255,255,.22), 0 6px 18px rgba(0,0,0,.08)}
 
 /* ========= Generic layout ========= */
 .wrap{max-width:1200px; margin:auto; padding:2.2rem 1rem}
@@ -58,14 +66,15 @@ h2{font-size:clamp(22px,2.6vw,30px); text-align:center; margin-bottom:1.1rem}
 
 /* ========= Categorías ========= */
 .grid--cats{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem}
-.cat{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:1rem; text-decoration:none; color:inherit; text-align:center; transition:transform .12s}
+.cat{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:1rem; text-decoration:none; color:inherit; text-align:center; transition:transform .12s ease, box-shadow .2s ease}
 .cat img{width:110px; height:auto; object-fit:contain; margin-bottom:.5rem}
 .cat:hover{transform:translateY(-2px)}
 
 /* ========= Productos ========= */
 .cards{display:grid; gap:1rem}
 .cards--list{grid-template-columns:repeat(3,1fr)}
-.card{background:#fff; border:1px solid var(--border); border-radius:var(--radius-small); display:flex; flex-direction:column; overflow:hidden}
+.card{background:#fff; border:1px solid var(--border); border-radius:var(--radius-small); display:flex; flex-direction:column; overflow:hidden; transition:transform .15s ease}
+.card:hover{transform:scale(1.02)}
 .card__media{display:grid; place-items:center; padding:1rem; background:#fff}
 .card__media img{width:150px; height:auto; object-fit:contain}
 .card__body{padding:1rem}
@@ -80,32 +89,59 @@ h2{font-size:clamp(22px,2.6vw,30px); text-align:center; margin-bottom:1.1rem}
 .featured__title{font-size:clamp(20px,2.2vw,26px); margin-bottom:.35rem}
 .featured__desc{color:#3d3d3d;}
 
-/* ========= Valores (pilares) ========= */
+/* ========= Valores ========= */
 .valores__tagline{color:var(--muted); text-align:center; margin-bottom:1rem}
 .valores__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem}
 .valor{background:#f4e1d6; border-radius:12px; padding:1rem; text-align:center; border:1px solid #edd5c7}
 .valor__icon{width:80px; height:80px; border-radius:50%; background:#efc7ac; display:grid; place-items:center; font-size:36px; margin:0 auto .5rem}
 
 /* ========= Servicios ========= */
+/* ========= Servicios ========= */
 .grid--serv{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem}
-.serv{display:flex; align-items:flex-start; gap:.8rem; background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem}
-.serv__img{width:46px; height:46px; object-fit:contain; border-radius:6px}
+
+/* La card pasa a grid y la imagen ocupa TODA la altura del box */
+.serv{
+  display:grid;
+  grid-template-columns: 140px 1fr; /* ancho de la columna de la imagen */
+  align-items:stretch;              /* estira la imagen a la altura del box */
+  gap:1rem;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1rem;
+  min-height:150px;                 /* altura mínima del box */
+}
+
+.serv__img{
+  width:100%;
+  height:100%;                      /* ← hace que tome la altura completa del box */
+  object-fit:cover;                 /* “cover” = se ve grande; puede recortar un poquito */
+  border-radius:8px;
+  display:block;
+}
+
+/* Responsivo: ajustá tamaños en pantallas más chicas */
+@media (max-width:1100px){
+  .grid--serv{grid-template-columns:repeat(2,1fr)}
+  .serv{grid-template-columns:120px 1fr; min-height:130px}
+}
+@media (max-width:720px){
+  .serv{grid-template-columns:100px 1fr; min-height:120px}
+}
 
 /* ========= Opiniones ========= */
 .grid--opin{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem}
 .op{background:#fff; border-left:6px solid var(--brand); border-radius:10px; padding:1rem; box-shadow:var(--shadow); color:#333}
 .op cite{display:block; margin-top:.5rem; color:#888}
 
-/* ========= Marcas (rueda infinita) ========= */
+/* ========= Marcas (carrusel infinito + drag) ========= */
 .marcas{background:#fff; padding:1.6rem 0}
-.marcas__viewport{overflow:hidden; max-width:1200px; margin:auto}
-.marcas__track{display:flex; width:max-content; animation:marcasScroll 28s linear infinite}
-.marcas__group{display:flex}
-.marcas__group img{height:42px; width:auto; filter:grayscale(1); opacity:.9; margin-right:40px}
-@keyframes marcasScroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)} /* recorre exactamente un grupo, no hay huecos */
-}
+.marcas__group{display:flex; align-items:center; gap:40px;}
+.marcas__viewport{overflow:hidden; max-width:1200px; margin:auto; cursor:grab}
+.marcas__viewport:active{cursor:grabbing}
+.marcas__rail{display:flex; align-items:center; gap:40px; padding:0 20px; will-change:transform}
+.marcas__item{flex:0 0 auto; display:grid; place-items:center}
+.marcas__item img{height:42px; width:auto; filter:grayscale(1); opacity:.9}
 
 /* ========= Contacto ========= */
 .contacto__box{max-width:720px; margin:auto; background:#fff; border:1px solid var(--border); border-radius:12px; padding:1rem; display:grid; gap:.7rem}
@@ -115,6 +151,12 @@ textarea{resize:vertical; border:1px solid #e6e6e6; border-radius:10px; padding:
 .footer{background:#000; color:#fff}
 .footer__content{display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap}
 .brand--footer .brand__name{color:#fff}
+
+/* ========= Reveal on scroll ========= */
+[data-reveal]{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
+[data-reveal="left"]{transform:translateX(-18px)}
+[data-reveal="right"]{transform:translateX(18px)}
+.reveal-in{opacity:1 !important; transform:none !important}
 
 /* ========= Responsive ========= */
 @media (max-width:1100px){
@@ -130,7 +172,7 @@ textarea{resize:vertical; border:1px solid #e6e6e6; border-radius:10px; padding:
   .hero{grid-template-columns:1fr; gap:1rem; text-align:center}
   .hero__content p{margin-inline:auto}
   .grid--cats{grid-template-columns:repeat(2,1fr)}
-  .cards--list{grid-template-columns:repeat(2,1fr)} /* mobile menos enorme */
+  .cards--list{grid-template-columns:repeat(2,1fr)}
   .featured{grid-template-columns:1fr; text-align:center}
   .featured__media img{width:200px}
   /* Menú mobile */

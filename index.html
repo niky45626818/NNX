@@ -7,7 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Header -->
+  <!-- Splash / Bienvenida 1.5s -->
+  <div id="splash" aria-hidden="true">
+    <img src="img/logo.png" alt="Tecnología Clima" class="splash__logo" />
+  </div>
+
+  <!-- Header fijo -->
   <header class="site-header" id="home">
     <div class="topbar topbar--row">
       <a href="#home" class="brand" aria-label="Tecnología Clima">
@@ -39,7 +44,7 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" data-reveal="right">
     <div class="hero__content">
       <h1>Confort eficiente para tu hogar</h1>
       <p>Calderas, radiadores y toalleros con instalación profesional y postventa real.</p>
@@ -48,8 +53,8 @@
     <img class="hero__image" src="img/portada.png" alt="Soluciones de climatización" />
   </section>
 
-  <!-- Categorías (atalhos) -->
-  <section class="wrap" id="categorias">
+  <!-- Categorías -->
+  <section class="wrap" id="categorias" data-reveal="left">
     <h2>Categorías</h2>
     <div class="grid grid--cats">
       <a href="#calderas-hogar" class="cat">
@@ -72,30 +77,30 @@
   </section>
 
   <!-- Productos -->
-  <main class="wrap" id="productos">
+  <main class="wrap" id="productos" data-reveal="right">
     <!-- Calderas Hogareñas -->
-    <section id="calderas-hogar" class="block block-products" data-key="calderas-hogar">
+    <section id="calderas-hogar" class="block block-products" data-key="calderas-hogar" data-reveal="left">
       <h2>Calderas Hogareñas</h2>
       <div class="featured" id="feat-calderas-hogar"></div>
       <div class="cards cards--list" id="cards-calderas-hogar"></div>
     </section>
 
     <!-- Calderas Centrales -->
-    <section id="calderas-centrales" class="block block-products" data-key="calderas-centrales">
+    <section id="calderas-centrales" class="block block-products" data-key="calderas-centrales" data-reveal="right">
       <h2>Calderas Centrales</h2>
       <div class="featured" id="feat-calderas-centrales"></div>
       <div class="cards cards--list" id="cards-calderas-centrales"></div>
     </section>
 
     <!-- Radiadores -->
-    <section id="radiadores" class="block block-products" data-key="radiadores">
+    <section id="radiadores" class="block block-products" data-key="radiadores" data-reveal="left">
       <h2>Radiadores</h2>
       <div class="featured" id="feat-radiadores"></div>
       <div class="cards cards--list" id="cards-radiadores"></div>
     </section>
 
     <!-- Toalleros -->
-    <section id="toalleros" class="block block-products" data-key="toalleros">
+    <section id="toalleros" class="block block-products" data-key="toalleros" data-reveal="right">
       <h2>Toalleros</h2>
       <div class="featured" id="feat-toalleros"></div>
       <div class="cards cards--list" id="cards-toalleros"></div>
@@ -103,7 +108,7 @@
   </main>
 
   <!-- Nuestros valores principales -->
-  <section class="wrap valores" id="valores" aria-labelledby="valores-title">
+  <section class="wrap valores" id="valores" aria-labelledby="valores-title" data-reveal="left">
     <h2 id="valores-title">Nuestros Valores Principales</h2>
     <p class="valores__tagline">La pasión por lo que hacemos nos hace diferentes, te hace diferente.</p>
 
@@ -131,33 +136,33 @@
     </div>
   </section>
 
-  <!-- Servicios (con imágenes) -->
-  <section class="wrap servicios" id="servicios">
+  <!-- Servicios -->
+  <section class="wrap servicios" id="servicios" data-reveal="right">
     <h2>Nuestros Servicios</h2>
     <div class="grid grid--serv">
       <article class="serv">
-        <img src="img/logo.png" alt="" class="serv__img">
+        <img src="img/ase.png" alt="" class="serv__img">
         <div>
           <h3>Asesoramiento</h3>
           <p>Relevamos tu necesidad y dimensionamos la solución de forma efectiva.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/logo.png" alt="" class="serv__img">
+        <img src="img/pr.png" alt="" class="serv__img">
         <div>
           <h3>Instalación</h3>
           <p>Montaje prolijo, seguro y dentro de norma. Coordinación llave en mano.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/logo.png" alt="" class="serv__img">
+        <img src="img/mante.png" alt="" class="serv__img">
         <div>
           <h3>Mantenimiento</h3>
           <p>Mantenimientos preventivos y correctivos para alargar la vida útil.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/logo.png" alt="" class="serv__img">
+        <img src="img/optima_condens.jpg" alt="" class="serv__img">
         <div>
           <h3>Garantía & Postventa</h3>
           <p>Soporte real, repuestos y seguimiento para que todo funcione perfecto.</p>
@@ -167,7 +172,7 @@
   </section>
 
   <!-- Opiniones -->
-  <section class="wrap opiniones" id="opiniones">
+  <section class="wrap opiniones" id="opiniones" data-reveal="left">
     <h2>Opiniones de Clientes</h2>
     <div class="grid grid--opin">
       <blockquote class="op">
@@ -185,40 +190,15 @@
     </div>
   </section>
 
-  <!-- Marcas (carrusel rueda infinita) -->
-  <section class="marcas" id="marcas" aria-label="Marcas con las que trabajamos">
-    <div class="marcas__viewport">
-      <div class="marcas__track">
-        <div class="marcas__group">
-          <img src="img/marcas.png" alt="Marca 1">
-          <img src="img/marcas.png" alt="Marca 2">
-          <img src="img/marcas.png" alt="Marca 3">
-          <img src="img/marcas.png" alt="Marca 4">
-          <img src="img/marcas.png" alt="Marca 5">
-          <img src="img/marcas.png" alt="Marca 6">
-          <img src="img/marcas.png" alt="Marca 7">
-          <img src="img/marcas.png" alt="Marca 8">
-          <img src="img/marcas.png" alt="Marca 9">
-          <img src="img/marcas.png" alt="Marca 10">
-        </div>
-        <div class="marcas__group" aria-hidden="true">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-          <img src="img/marcas.png" alt="">
-        </div>
-      </div>
+  <!-- Marcas (carrusel infinito + drag) -->
+  <section class="marcas" id="marcas" aria-label="Marcas con las que trabajamos" data-reveal="right">
+    <div class="marcas__viewport" id="marcasViewport" aria-live="off" aria-roledescription="carrusel">
+      <div class="marcas__rail" id="marcasRail" role="list"></div>
     </div>
   </section>
 
   <!-- Contacto -->
-  <section class="wrap contacto" id="contacto">
+  <section class="wrap contacto" id="contacto" data-reveal="left">
     <h2>Contacto</h2>
     <div class="contacto__box">
       <label for="msg">Contanos qué necesitás</label>

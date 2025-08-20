@@ -2,6 +2,27 @@
 const WSP_NUMBER = "549XXXXXXXXXX"; // <- Reemplazá por tu número (sin +, sin espacios)
 const DEFAULT_WSP_MSG = "Hola! Quiero una cotización.";
 
+/* ======= Splash (logo 1.5s) – robusto con fallback ======= */
+// Muestra el logo 1.5s y lo oculta SIEMPRE (aunque falle el load u otro JS).
+(() => {
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+
+  const finish = () => {
+    if (splash.dataset.done === "1") return; // evita doble ejecución
+    splash.dataset.done = "1";
+    splash.classList.add("hide");
+    // Remueve el nodo para que no capture eventos/cliqueos
+    setTimeout(() => splash.remove(), 700);
+  };
+
+  // Caso normal: al cargar la página, espera 1.5s y oculta
+  window.addEventListener("load", () => setTimeout(finish, 1500));
+
+  // Fallback: si por algún motivo no dispara 'load', forzamos ocultar a los 3s
+  setTimeout(finish, 3000);
+})();
+
 /* ================= Menú / UI ================= */
 const hamburger = document.getElementById("hamburger");
 const navLinks  = document.getElementById("navLinks");
@@ -34,12 +55,29 @@ ctaHero?.addEventListener("click", (e) => {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+/* ======= Reveal on scroll (inicia tras el splash) ======= */
+window.addEventListener("load", () => {
+  // Arrancamos el reveal un pelín después del splash
+  setTimeout(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+    initReveal();
+  }, 1600);
+});
+
+function initReveal(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add("reveal-in");
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll("[data-reveal]").forEach(el => obs.observe(el));
+}
+
 /* ======= Resolución inteligente de imágenes ======= */
-// Si algún archivo tiene otro nombre/extensión, lo indicás acá:
-const IMG_OVERRIDE = {
-  // "caldera_prima_tec": "caldera_prima_tec2.png",
-  // "diva_tecno_smart": "diva_tecno_smart.JPG",
-};
+const IMG_OVERRIDE = { /* "caldera_prima_tec": "caldera_prima_tec2.png" */ };
 
 function imgCandidates(base){
   if (IMG_OVERRIDE[base]) return [`img/${IMG_OVERRIDE[base]}`];
@@ -140,7 +178,7 @@ function createCard({img, title, desc}, categoryKey){
     </div>
   `;
 
-  // Carga inteligente de imagen (png -> jpg -> jpeg -> webp -> logo)
+  // Carga inteligente de imagen
   const imgEl = el.querySelector(".card__media img");
   setSmartImage(imgEl, img);
 
@@ -175,9 +213,7 @@ function setFeatured(categoryKey, item){
     </div>
   `;
 
-  // Carga inteligente de imagen del destacado
   setSmartImage(document.getElementById(`feat-img-${categoryKey}`), item.img);
-
   document.getElementById(`feat-cta-${categoryKey}`).addEventListener("click", () => {
     toWhatsapp(`Hola! Me interesa: ${item.title} (${categoryKey.replace("-", " ")}).`);
   });
@@ -202,3 +238,111 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
   const msg = val ? `Hola! Me gustaría cotizar / consultar: ${val}` : DEFAULT_WSP_MSG;
   toWhatsapp(msg);
 });
+
+/* ================= Carrusel Marcas (infinito + drag) ================= */
+(function initMarcas(){
+  const viewport = document.getElementById("marcasViewport");
+  const rail     = document.getElementById("marcasRail");
+  if (!viewport || !rail) return;
+
+  // 10 logos: marca_1 ... marca_10 (probamos /img y raíz, y distintas extensiones)
+  const logosNums = Array.from({length:10}, (_,i)=> i+1);
+
+  // Candidatos de ruta/extensión a prueba de balas
+  const candidatesFor = (n) => [
+    `img/marca_${n}.png`, `img/marca_${n}.PNG`,
+    `img/marca_${n}.jpg`, `img/marca_${n}.jpeg`, `img/marca_${n}.webp`,
+    `marca_${n}.png`,     `marca_${n}.PNG`,
+    `marca_${n}.jpg`,     `marca_${n}.jpeg`,     `marca_${n}.webp`,
+  ];
+
+  function loadLogo(img, n){
+    const list = candidatesFor(n);
+    let i = 0;
+    const tryNext = () => { if (i < list.length) img.src = list[i++]; };
+    img.onerror = tryNext;
+    tryNext();
+  }
+
+  // Grupo de 10 logos en HORIZONTAL (forzamos flex inline por si el CSS no aplica)
+  function makeGroup(){
+    const group = document.createElement("div");
+    group.className = "marcas__group";
+    group.style.display = "flex";
+    group.style.flexWrap = "nowrap";
+    group.style.alignItems = "center";
+    group.style.gap = "40px";
+
+    logosNums.forEach(n=>{
+      const item = document.createElement("div");
+      item.className = "marcas__item";
+      const img = document.createElement("img");
+      img.alt = "Marca";
+      img.style.display = "block"; // evita salto por línea base
+      loadLogo(img, n);
+      item.appendChild(img);
+      group.appendChild(item);
+    });
+    return group;
+  }
+
+  rail.innerHTML = "";
+  const groupA = makeGroup();
+  const groupB = makeGroup();
+  rail.appendChild(groupA);
+  rail.appendChild(groupB);
+
+  let offset = 0;            // translateX actual (px)
+  let speed  = 0.4;          // px/frame (auto-scroll suave)
+  let running = true;        // auto animación
+  let isDrag = false, startX = 0, startOffset = 0, groupW = 0;
+
+  function measure(){
+    groupW = groupA.getBoundingClientRect().width || 0; // ancho real de UN grupo
+  }
+
+  // Medimos cuando carguen todas las imágenes del primer grupo y en resize
+  const imgs = groupA.querySelectorAll("img");
+  let loaded = 0;
+  const onImgLoad = () => { if (++loaded === imgs.length) measure(); };
+  imgs.forEach(img => img.complete ? onImgLoad() : img.addEventListener("load", onImgLoad, { once:true }));
+  window.addEventListener("resize", measure);
+
+  // Auto loop infinito
+  function tick(){
+    if (running && !isDrag && groupW){
+      offset -= speed;
+      if (offset <= -groupW) offset += groupW; // resetea sin salto
+      rail.style.transform = `translateX(${offset}px)`;
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Interacción drag (mouse/touch)
+  viewport.addEventListener("pointerdown", (e)=>{
+    isDrag = true; running = false;
+    startX = e.clientX; startOffset = offset;
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener("pointermove", (e)=>{
+    if (!isDrag) return;
+    const dx = e.clientX - startX;
+    offset = startOffset + dx;
+
+    // Mantener continuidad del loop durante el arrastre
+    if (groupW){
+      while (offset > 0)       offset -= groupW;
+      while (offset < -groupW) offset += groupW;
+    }
+    rail.style.transform = `translateX(${offset}px)`;
+  });
+  const endDrag = (e)=>{
+    if (!isDrag) return;
+    isDrag = false;
+    viewport.releasePointerCapture?.(e.pointerId);
+    running = true;
+  };
+  viewport.addEventListener("pointerup", endDrag);
+  viewport.addEventListener("pointercancel", endDrag);
+})();
