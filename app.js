@@ -1,27 +1,40 @@
 /* ================= Config ================= */
-const WSP_NUMBER = "549XXXXXXXXXX"; // <- Reemplazá por tu número (sin +, sin espacios)
+const WSP_NUMBER = "5491125307337"; // <- tu número sin + ni espacios
 const DEFAULT_WSP_MSG = "Hola! Quiero una cotización.";
 
-/* ======= Splash (logo 1.5s) – robusto con fallback ======= */
-// Muestra el logo 1.5s y lo oculta SIEMPRE (aunque falle el load u otro JS).
+/* ======= Splash ultrarrápido y a prueba de fallos ======= */
+/* Oculta el splash sí o sí aunque haya errores de carga o imágenes faltantes */
 (() => {
   const splash = document.getElementById("splash");
   if (!splash) return;
 
   const finish = () => {
-    if (splash.dataset.done === "1") return; // evita doble ejecución
+    if (splash.dataset.done === "1") return;
     splash.dataset.done = "1";
     splash.classList.add("hide");
-    // Remueve el nodo para que no capture eventos/cliqueos
-    setTimeout(() => splash.remove(), 700);
+    setTimeout(() => splash.remove(), 500);
   };
 
-  // Caso normal: al cargar la página, espera 1.5s y oculta
-  window.addEventListener("load", () => setTimeout(finish, 1500));
-
-  // Fallback: si por algún motivo no dispara 'load', forzamos ocultar a los 3s
-  setTimeout(finish, 3000);
+  // Lo oculto rápido sin depender de window.load
+  setTimeout(finish, 1200);
+  // Backup por si hay algo muy lento o bloqueado
+  window.addEventListener("load", finish);
+  setTimeout(finish, 2500);
 })();
+
+/* ======= Fallback global de imágenes ======= */
+/* Si cualquier <img> falla, se cambia automáticamente por el logo */
+document.addEventListener(
+  "error",
+  (e) => {
+    const t = e.target;
+    if (t && t.tagName === "IMG" && !t.dataset.fallback) {
+      t.dataset.fallback = "1";
+      t.src = "img/logo.png";
+    }
+  },
+  true // captura
+);
 
 /* ================= Menú / UI ================= */
 const hamburger = document.getElementById("hamburger");
@@ -55,28 +68,30 @@ ctaHero?.addEventListener("click", (e) => {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* ======= Reveal on scroll (inicia tras el splash) ======= */
-/* ======= Reveal on scroll (robusto) ======= */
-/* Marca el body para que el CSS oculte los data-reveal */
+/* ======= Reveal on scroll: empieza sin esperar al load ======= */
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("reveal-enable");
+  if (!window.__revealStarted) {
+    window.__revealStarted = true;
+    setTimeout(startReveal, 1200); // arranca aunque no haya load
+  }
+});
+window.addEventListener("load", () => {
+  if (!window.__revealStarted) {
+    window.__revealStarted = true;
+    startReveal();
+  }
 });
 
-/* Inicia el reveal después del splash, y con fallback revela todo */
 function startReveal(){
   document.documentElement.style.scrollBehavior = "smooth";
   initReveal();
-
   // Fallback: si algo falló, revela todo igual
   setTimeout(() => {
     document.querySelectorAll("[data-reveal]:not(.reveal-in)")
       .forEach(el => el.classList.add("reveal-in"));
-  }, 3500);
+  }, 2500);
 }
-
-window.addEventListener("load", () => {
-  setTimeout(startReveal, 1600); // coordina con el splash
-});
 
 /* Header fijo: calcula la altura y la expone en --header-h */
 function setHeaderOffset(){
@@ -85,7 +100,6 @@ function setHeaderOffset(){
 }
 window.addEventListener('load', setHeaderOffset);
 window.addEventListener('resize', setHeaderOffset);
-
 
 function initReveal(){
   const obs = new IntersectionObserver((entries) => {
@@ -116,8 +130,11 @@ function setSmartImage(imgEl, base){
   const list = imgCandidates(base);
   let i = 0;
   const tryNext = () => {
-    if (i >= list.length){ imgEl.src = "img/logo.png"; return; }
-    imgEl.src = list[i++];
+    if (i < list.length) {
+      imgEl.src = list[i++];
+    } else {
+      imgEl.src = "img/logo.png"; // fallback definitivo
+    }
   };
   imgEl.onerror = tryNext;
   tryNext();
@@ -146,6 +163,7 @@ const data = {
     { img:"caldera_CM", title:"Caldera CM (eléctrica)",
       desc:"Instalación/mantenimiento de bajo costo. 99,8% de eficiencia. Bomba de velocidad variable. Lista para doble servicio con tanque." }
   ],
+  /* Centrales se renderiza dentro de "Calderas Hogareñas" */
   "calderas-centrales": [
     { img:"optima_condens", title:"Óptima Condens (mural de condensación)",
       desc:"Hasta 103% de rendimiento. Cascada hasta 15 equipos (2250 kW), modulación 1:6, intercambiador eficiente y aislación termoacústica." },
@@ -155,6 +173,16 @@ const data = {
       desc:"Generadores 93% de rendimiento, 220.000 a 710.000 kcal/h. Acero, gas o gasoil, tiro natural, batería." },
     { img:"caldera_XP", title:"Caldera XP (media potencia)",
       desc:"58.000 a 120.000 kcal/h. Quemador INOX y detector de tiraje. Gas/gasoil, tiro natural, apta batería." }
+  ],
+  "aires": [
+    { img:"ac1", title:"Split Inverter Frío/Calor",
+      desc:"Instalación profesional, bajo consumo y gran confort. Ideal para hogares y oficinas." },
+    { img:"ac2", title:"Split Convencional",
+      desc:"Excelente relación precio/calidad. Opciones frío solo o frío/calor." },
+    { img:"ac3", title:"Aire de Ventana",
+      desc:"Solución práctica para espacios compactos. Fácil mantenimiento." },
+    { img:"ac4", title:"Split Piso-Techo",
+      desc:"Potencia para ambientes grandes. Flujo de aire uniforme." }
   ],
   "radiadores": [
     { img:"radiador_broen", title:"Radiador Broen",
@@ -181,6 +209,12 @@ const data = {
       desc:"Color negro, programación y control de temperatura. Arranque rápido." },
     { img:"domino_S", title:"Domino S (eléctrico blanco)",
       desc:"Diseño minimalista. 80 y 150 cm. Fácil instalación." }
+  ],
+  "piscina": [
+    { img:"pileta", title:"Climatizador de Piscina",
+      desc:"Extiende la temporada con bombas de calor o intercambiadores. Instalación y soporte profesional." },
+    { img:"xion", title:"Bomba de Calor para Piscina XION",
+      desc:"Alta eficiencia y control electrónico para mantener el agua a la temperatura ideal." }
   ]
 };
 
@@ -201,17 +235,14 @@ function createCard({img, title, desc}, categoryKey){
     </div>
   `;
 
-  // Carga inteligente de imagen
   const imgEl = el.querySelector(".card__media img");
   setSmartImage(imgEl, img);
 
-  // CTA dentro de la card
   el.querySelector("button").addEventListener("click", (ev) => {
     ev.stopPropagation();
     toWhatsapp(`Hola! Quiero cotizar: ${title} (${categoryKey.replace("-", " ")}).`);
   });
 
-  // Click en toda la card -> set featured
   el.addEventListener("click", () => {
     setFeatured(categoryKey, {img, title, desc});
     document.getElementById(`feat-${categoryKey}`)?.scrollIntoView({behavior:"smooth", block:"start"});
@@ -268,10 +299,8 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
   const rail     = document.getElementById("marcasRail");
   if (!viewport || !rail) return;
 
-  // 10 logos: marca_1 ... marca_10 (probamos /img y raíz, y distintas extensiones)
   const logosNums = Array.from({length:10}, (_,i)=> i+1);
 
-  // Candidatos de ruta/extensión a prueba de balas
   const candidatesFor = (n) => [
     `img/marca_${n}.png`, `img/marca_${n}.PNG`,
     `img/marca_${n}.jpg`, `img/marca_${n}.jpeg`, `img/marca_${n}.webp`,
@@ -282,12 +311,17 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
   function loadLogo(img, n){
     const list = candidatesFor(n);
     let i = 0;
-    const tryNext = () => { if (i < list.length) img.src = list[i++]; };
+    const tryNext = () => {
+      if (i < list.length) {
+        img.src = list[i++];
+      } else {
+        img.src = "img/logo.png"; // fallback definitivo
+      }
+    };
     img.onerror = tryNext;
     tryNext();
   }
 
-  // Grupo de 10 logos en HORIZONTAL (forzamos flex inline por si el CSS no aplica)
   function makeGroup(){
     const group = document.createElement("div");
     group.className = "marcas__group";
@@ -301,7 +335,7 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
       item.className = "marcas__item";
       const img = document.createElement("img");
       img.alt = "Marca";
-      img.style.display = "block"; // evita salto por línea base
+      img.style.display = "block";
       loadLogo(img, n);
       item.appendChild(img);
       group.appendChild(item);
@@ -315,34 +349,31 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
   rail.appendChild(groupA);
   rail.appendChild(groupB);
 
-  let offset = 0;            // translateX actual (px)
-  let speed  = 0.4;          // px/frame (auto-scroll suave)
-  let running = true;        // auto animación
+  let offset = 0;
+  let speed  = 0.4;
+  let running = true;
   let isDrag = false, startX = 0, startOffset = 0, groupW = 0;
 
   function measure(){
-    groupW = groupA.getBoundingClientRect().width || 0; // ancho real de UN grupo
+    groupW = groupA.getBoundingClientRect().width || 0;
   }
 
-  // Medimos cuando carguen todas las imágenes del primer grupo y en resize
   const imgs = groupA.querySelectorAll("img");
   let loaded = 0;
   const onImgLoad = () => { if (++loaded === imgs.length) measure(); };
   imgs.forEach(img => img.complete ? onImgLoad() : img.addEventListener("load", onImgLoad, { once:true }));
   window.addEventListener("resize", measure);
 
-  // Auto loop infinito
   function tick(){
     if (running && !isDrag && groupW){
       offset -= speed;
-      if (offset <= -groupW) offset += groupW; // resetea sin salto
+      if (offset <= -groupW) offset += groupW;
       rail.style.transform = `translateX(${offset}px)`;
     }
     requestAnimationFrame(tick);
   }
   tick();
 
-  // Interacción drag (mouse/touch)
   viewport.addEventListener("pointerdown", (e)=>{
     isDrag = true; running = false;
     startX = e.clientX; startOffset = offset;
@@ -352,8 +383,6 @@ document.getElementById("btnWsp")?.addEventListener("click", () => {
     if (!isDrag) return;
     const dx = e.clientX - startX;
     offset = startOffset + dx;
-
-    // Mantener continuidad del loop durante el arrastre
     if (groupW){
       while (offset > 0)       offset -= groupW;
       while (offset < -groupW) offset += groupW;

@@ -7,16 +7,18 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Splash / Bienvenida 1.5s -->
+  <!-- Splash / Bienvenida -->
   <div id="splash" aria-hidden="true">
-    <img src="img/logo.png" alt="Tecnología Clima" class="splash__logo" />
+    <img src="img/logo.png" alt="Tecnología Clima" class="splash__logo"
+         onerror="this.src='img/logo.png'"/>
   </div>
 
   <!-- Header fijo -->
   <header class="site-header" id="home">
     <div class="topbar topbar--row">
       <a href="#home" class="brand" aria-label="Tecnología Clima">
-        <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo" />
+        <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo"
+             onerror="this.src='img/logo.png'"/>
         <span class="brand__name">Tecnología Clima</span>
       </a>
 
@@ -47,10 +49,11 @@
   <section class="hero" data-reveal="right">
     <div class="hero__content">
       <h1>Confort eficiente para tu hogar</h1>
-      <p>Calderas, radiadores y toalleros con instalación profesional y postventa real.</p>
+      <p>Calderas , radiadores , piso radiantes , aire acondicionado, instalación , equipos centrales ,climatizadores de piletas , obras de climatización&nbsp;en&nbsp;general y postventa real.</p>
       <a class="btn btn--wsp" href="#" id="ctaHero">Quiero cotizar por WhatsApp</a>
     </div>
-    <img class="hero__image" src="img/portada.png" alt="Soluciones de climatización" />
+    <img class="hero__image" src="img/portada.png" alt="Soluciones de climatización"
+         onerror="this.src='img/logo.png'"/>
   </section>
 
   <!-- Categorías -->
@@ -58,38 +61,58 @@
     <h2>Categorías</h2>
     <div class="grid grid--cats">
       <a href="#calderas-hogar" class="cat">
-        <img src="img/caldera_prima_tec.png" onerror="this.src='img/caldera.png'" alt="Calderas hogareñas">
+        <img src="img/caldera_prima_tec.png" alt="Calderas hogareñas"
+             onerror="this.src='img/logo.png'" loading="lazy">
         <h3>Calderas Hogareñas</h3>
       </a>
-      <a href="#calderas-centrales" class="cat">
-        <img src="img/optima_condens.png" onerror="this.src='img/cal.png'" alt="Calderas centrales">
-        <h3>Calderas Centrales</h3>
+
+      <!-- Reemplazo de 'Calderas Centrales' por 'Venta e Instalación de Aire Acondicionado' -->
+      <a href="#aires" class="cat">
+        <img src="img/aire_princ.png" alt="Venta e instalación de aire acondicionado"
+             onerror="this.src='img/logo.png'" loading="lazy">
+        <h3>Venta e Instalación de Aire Acondicionado</h3>
       </a>
+
       <a href="#radiadores" class="cat">
-        <img src="img/radiador_broen.png" onerror="this.src='img/radiador_gamma.png'" alt="Radiadores">
+        <img src="img/radiador_broen.png" alt="Radiadores"
+             onerror="this.src='img/logo.png'" loading="lazy">
         <h3>Radiadores</h3>
       </a>
+
       <a href="#toalleros" class="cat">
-        <img src="img/scala.png" onerror="this.src='img/scala_S.png'" alt="Toalleros">
+        <img src="img/scala.png" alt="Toalleros"
+             onerror="this.src='img/logo.png'" loading="lazy">
         <h3>Toalleros</h3>
+      </a>
+
+      <!-- Nueva categoría: Climatización de Piscina -->
+      <a href="#piscina" class="cat">
+        <img src="img/pileta.png" alt="Climatización de piscina"
+             onerror="this.src='img/logo.png'" loading="lazy">
+        <h3>Climatización de Piscina</h3>
       </a>
     </div>
   </section>
 
   <!-- Productos -->
   <main class="wrap" id="productos" data-reveal="right">
-    <!-- Calderas Hogareñas -->
+    <!-- Calderas Hogareñas (se mantiene) -->
     <section id="calderas-hogar" class="block block-products" data-key="calderas-hogar" data-reveal="left">
       <h2>Calderas Hogareñas</h2>
       <div class="featured" id="feat-calderas-hogar"></div>
       <div class="cards cards--list" id="cards-calderas-hogar"></div>
-    </section>
 
-    <!-- Calderas Centrales -->
-    <section id="calderas-centrales" class="block block-products" data-key="calderas-centrales" data-reveal="right">
-      <h2>Calderas Centrales</h2>
+      <!-- Sección unificada: Calderas Centrales dentro de Calderas Hogareñas -->
+      <h3 style="margin-top:1.6rem">Calderas Centrales</h3>
       <div class="featured" id="feat-calderas-centrales"></div>
       <div class="cards cards--list" id="cards-calderas-centrales"></div>
+    </section>
+
+    <!-- Aire Acondicionado -->
+    <section id="aires" class="block block-products" data-key="aires" data-reveal="right">
+      <h2>Venta e Instalación de Aire Acondicionado</h2>
+      <div class="featured" id="feat-aires"></div>
+      <div class="cards cards--list" id="cards-aires"></div>
     </section>
 
     <!-- Radiadores -->
@@ -104,6 +127,13 @@
       <h2>Toalleros</h2>
       <div class="featured" id="feat-toalleros"></div>
       <div class="cards cards--list" id="cards-toalleros"></div>
+    </section>
+
+    <!-- Climatización de Piscina -->
+    <section id="piscina" class="block block-products" data-key="piscina" data-reveal="left">
+      <h2>Climatización de Piscina</h2>
+      <div class="featured" id="feat-piscina"></div>
+      <div class="cards cards--list" id="cards-piscina"></div>
     </section>
   </main>
 
@@ -141,28 +171,29 @@
     <h2>Nuestros Servicios</h2>
     <div class="grid grid--serv">
       <article class="serv">
-        <img src="img/ase.png" alt="" class="serv__img">
+        <img src="img/ase.png" alt="" class="serv__img" onerror="this.src='img/logo.png'" loading="lazy">
         <div>
           <h3>Asesoramiento</h3>
           <p>Relevamos tu necesidad y dimensionamos la solución de forma efectiva.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/pr.png" alt="" class="serv__img">
+        <img src="img/pr.png" alt="" class="serv__img" onerror="this.src='img/logo.png'" loading="lazy">
         <div>
           <h3>Instalación</h3>
           <p>Montaje prolijo, seguro y dentro de norma. Coordinación llave en mano.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/mante.png" alt="" class="serv__img">
+        <img src="img/mante.png" alt="" class="serv__img" onerror="this.src='img/logo.png'" loading="lazy">
         <div>
           <h3>Mantenimiento</h3>
           <p>Mantenimientos preventivos y correctivos para alargar la vida útil.</p>
         </div>
       </article>
       <article class="serv">
-        <img src="img/optima_condens.jpg" alt="" class="serv__img">
+        <img src="img/optima_condens.jpg" alt="" class="serv__img"
+             onerror="this.src='img/logo.png'" loading="lazy">
         <div>
           <h3>Garantía & Postventa</h3>
           <p>Soporte real, repuestos y seguimiento para que todo funcione perfecto.</p>
@@ -190,7 +221,7 @@
     </div>
   </section>
 
-  <!-- Marcas (carrusel infinito + drag) -->
+  <!-- Marcas -->
   <section class="marcas" id="marcas" aria-label="Marcas con las que trabajamos" data-reveal="right">
     <div class="marcas__viewport" id="marcasViewport" aria-live="off" aria-roledescription="carrusel">
       <div class="marcas__rail" id="marcasRail" role="list"></div>
@@ -209,16 +240,27 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="wrap footer__content">
-      <a href="#home" class="brand brand--footer">
-        <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo" />
-        <span class="brand__name">Tecnología Clima</span>
-      </a>
-      <p>© <span id="year"></span> Tecnología Clima — Todos los derechos reservados</p>
-      <a class="btn btn--ghost" href="#home">Volver arriba</a>
+<footer class="footer">
+  <div class="wrap footer__content"
+       style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem;">
+    <a href="#home" class="brand brand--footer">
+      <img src="img/logo.png" alt="Tecnología Clima" class="brand__logo"
+           onerror="this.src='img/logo.png'"/>
+      <span class="brand__name">Tecnología Clima</span>
+    </a>
+
+    <p class="footer__legal">© <span id="year"></span> Tecnología Clima — Todos los derechos reservados</p>
+
+    <div class="footer__social">
+      <a href="mailto:info@tecnologiaclima.com">info@tecnologiaclima.com</a>
+      <span> • </span>
+      <a href="https://www.instagram.com/tecnologia_clima/" target="_blank" rel="noopener">@tecnologiaclima</a>
     </div>
-  </footer>
+
+    <a class="btn btn--ghost" href="#home">Volver arriba</a>
+  </div>
+</footer>
+
 
   <script src="app.js"></script>
 </body>
